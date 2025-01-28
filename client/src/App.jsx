@@ -28,7 +28,7 @@ function App() {
     alert(`Form submitted successfully! ${JSON.stringify(details)}`);
 
     try{
-      const response = await fetch('http://localhost:5000/api/details', {
+      const response = await fetch('http://localhost:8080/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
