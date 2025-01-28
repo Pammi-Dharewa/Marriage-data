@@ -5,12 +5,12 @@ body {
   font-family: modern;
   margin: 0;
   padding: 0;
-  background-color: #374128;
+  background-color: #151713;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  color: #333;
+  color: #b5adad;
 }
 
 /* Form container */
