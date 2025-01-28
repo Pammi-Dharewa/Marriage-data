@@ -3,13 +3,15 @@ import './App.css';
 
 function App() {
   const [details, setDetails] = useState({
-    name: '',
-    address: '',
-    amount: '',
-    gold: '',
-    silver: '',
-    otherGifts: '',
-    option: '',
+      firstName: '',
+      lastName:'',
+      city:'',
+      address: '',
+      amount: '',
+      gold: '',
+      silver: '',
+      objects: '',
+      option: '',
   });
 
   // Handle input change
@@ -28,7 +30,7 @@ function App() {
     alert(`Form submitted successfully! ${JSON.stringify(details)}`);
 
     try{
-      const response = await fetch('http://localhost:8080/add', {
+      const response = await fetch('http://localhost:8080/presentation', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,12 +49,14 @@ function App() {
     }
 
     setDetails({
-      name: '',
+      firstName: '',
+      lastName:'',
+      city:'',
       address: '',
       amount: '',
       gold: '',
       silver: '',
-      otherGifts: '',
+      objects: '',
       option: '',
     })
   };
@@ -63,14 +67,42 @@ function App() {
       <h1>Details</h1>
       <form onSubmit={handleSubmit} className="form">
 
-        {/* Name */}
+
+        {/* first Name */}
         <div className="form-group">
-          <label htmlFor="name">Name: </label>
+          <label htmlFor="name">First Name: </label>
           <input
             type="text"
-            name="name"
-            id="name"
-            value={details.name}
+            name="firstName"
+            id="firstName"
+            value={details.firstName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        {/* Last Name */}
+        <div className="form-group">
+          <label htmlFor="name">Last Name: </label>
+          <input
+            type="text"
+            name="lastName"
+            id="lastName"
+            value={details.lastName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+
+        {/* City */}
+        <div className="form-group">
+          <label htmlFor="name">City: </label>
+          <input
+            type="text"
+            name="city"
+            id="city"
+            value={details.city}
             onChange={handleChange}
             required
           />
@@ -131,9 +163,9 @@ function App() {
           <label htmlFor="otherGifts">Other Gifts: </label>
           <input
             type="text"
-            name="otherGifts"
-            id="otherGifts"
-            value={details.otherGifts}
+            name="objects"
+            id="objects"
+            value={details.objects}
             onChange={handleChange}
           />
         </div>
