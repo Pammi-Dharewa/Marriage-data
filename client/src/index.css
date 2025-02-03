@@ -1,14 +1,12 @@
 /* App.css */
+/* @import "tailwindcss"; */
 
 /* General body styling */
 body {
   font-family: modern;
   margin: 0;
   padding: 0;
-  background-color: #151713;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /* background-color: #151811; */
   height: 100vh;
   color: #b5adad;
 }
@@ -16,17 +14,7 @@ body {
 /* Form container */
 .form-container {
   background-color: #ffffff;
-  padding: 2rem;
-  border-radius: 12px;
-  width: 30rem;
-  margin-top: 2rem;
-}
-
-/* Form heading */
-h1 {
-  text-align: center;
-  color: #444;
-  margin-bottom: 1.5rem;
+  width: auto;
 }
 
 /* Form group */
