@@ -31,7 +31,7 @@ const handleSubmit = async (e) => {
   alert(`Form submitted successfully! ${JSON.stringify(details)}`);
 
   try{
-    const response = await fetch('https://8015-117-217-216-203.ngrok-free.app/presentation', {
+    const response = await fetch('https://4c11-117-217-220-193.ngrok-free.app/presentation', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -54,6 +54,7 @@ const handleSubmit = async (e) => {
     lastName:'',
     city:'',
     address: '',
+    phone: '',
     amount: '',
     gold: '',
     silver: '',
@@ -65,9 +66,9 @@ const handleSubmit = async (e) => {
   return (
     <>
       <div
-      className="form-container w-full h-screen">
+      className="form-container w-full p-5 h-full">
       <h1 className='mt-10 text-l text-red-500 flex items-center justify-center'>Please fill your Details</h1>
-      <form onSubmit={handleSubmit} className="form p-10 flex justify-center">
+      <form onSubmit={handleSubmit} className=" form p-10 flex justify-center">
 
       <div className='w-1/2 '>
 
@@ -123,6 +124,19 @@ const handleSubmit = async (e) => {
             required
           />
         </div>
+
+        {/* phone */}
+        <div className="form-group">
+          <label htmlFor="phone">Phone: </label>
+          <input
+            type="number"
+            name="phone"
+            id="phone"
+            value={details.phone}
+            onChange={handleChange}
+          />
+        </div>
+
 
         {/* Gold */}
         <div className="form-group">

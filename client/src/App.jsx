@@ -6,6 +6,7 @@ import Presentation from './components/Presentation';
 import Taken from './components/Taken';
 import Data_p from './components/Data_p';
 import Data_t from './components/Data_t';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -15,12 +16,12 @@ function App() {
      <Navbar></Navbar>
       <Routes>
       <Route path='/' element={<Home></Home>}></Route> 
-      <Route path='/presentaion' element={ <Presentation></Presentation>}></Route>
+      <Route path='/presentation' element={ <Presentation></Presentation>}></Route>
       <Route path='/taken' element ={<Taken></Taken>}></Route>      
       <Route path='/pdata' element ={<Data_p></Data_p>}></Route>      
-      <Route path='/tdata' element ={<Data_t></Data_t>}></Route>      
-
+      <Route path='/tdata' element ={<Data_t></Data_t>}></Route> 
       </Routes>
+      <Footer></Footer>
       
     </BrowserRouter>
     </> 
