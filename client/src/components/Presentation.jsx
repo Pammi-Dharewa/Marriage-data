@@ -8,6 +8,7 @@ const Presentation = () => {
     lastName:'',
     city:'',
     address: '',
+    phone: '',
     amount: '',
     gold: '',
     silver: '',
