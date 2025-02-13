@@ -38,13 +38,13 @@ const Navbar = () => {
                 to="/presentation"
                 className="hover:text-gray-300 transition duration-300 hover:scale-105"
               >
-                Presentation Form
+                Form
               </Link>
               <Link
-                to="/taken"
+                to="/query"
                 className="hover:text-gray-300 transition duration-300 hover:scale-105"
               >
-                Taken Form
+                Query
               </Link>
             </div>
           </div>
@@ -57,7 +57,7 @@ const Navbar = () => {
                 className="w-full px-4 py-2 text-sm bg-white text-gray-700 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 hover:bg-gray-100 transition duration-300"
               >
                 <option value="">Get your Data</option>
-                <option value="/pdata">Presentation</option>
+                <option value="/pdata">Gifted</option>
                 <option value="/tdata">Taken</option>
               </select>
             </div>
@@ -101,15 +101,15 @@ const Navbar = () => {
                 className="hover:text-gray-300 transition duration-300 hover:scale-105"
                 onClick={toggleMobileMenu}
               >
-                Presentation Form
+                Form
               </Link>
-              <Link
+              {/* <Link
                 to="/taken"
                 className="hover:text-gray-300 transition duration-300 hover:scale-105"
                 onClick={toggleMobileMenu}
               >
                 Taken Form
-              </Link>
+              </Link> */}
               <div className="relative w-full">
                 <select
                   onClick={(e)=>{
@@ -121,7 +121,7 @@ const Navbar = () => {
                   className="w-full px-4 py-2 text-sm bg-white text-gray-700 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 hover:bg-gray-100 transition duration-300"
                 >
                   <option value="/">Get your Data</option>
-                  <option value="/pdata" onClick={toggleMobileMenu}>Presentation</option>
+                  <option value="/pdata" onClick={toggleMobileMenu}>Gifted</option>
                   <option value="/tdata" onClick={toggleMobileMenu}>Taken</option>
                 </select>
               </div>

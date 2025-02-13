@@ -1,70 +1,11 @@
-/* App.css */
-/* @import "tailwindcss"; */
 
-/* General body styling */
 body {
   font-family: modern;
   margin: 0;
   padding: 0;
-  /* background-color: #151811; */
   height: 100vh;
-  color: #b5adad;
 }
 
-/* Form container */
-.form-container {
-  background-color: #ffffff;
-  width: auto;
-}
-
-/* Form group */
-.form-group {
-  margin-bottom: 1rem;
-}
-
-/* Label styling */
-label {
-  display: flex;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #555;
-}
-
-/* Input fields */
-input,
-select {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-  box-sizing: border-box;
-}
-
-/* Input focus effect */
-input:focus,
-select:focus {
-  border-color: #007bff;
-  outline: none;
-  box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
-}
-
-/* Submit button */
-.submit-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 0.75rem 1rem;
-  border-radius: 6px;
-  font-size: 1rem;
-  cursor: pointer;
-  width: 100%;
-  transition: background-color 0.3s;
-}
-
-.submit-button:hover {
-  background-color: #0056b3;
-}
 
 
 
