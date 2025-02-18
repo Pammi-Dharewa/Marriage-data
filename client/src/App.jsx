@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import Register from './components/Register';
 import Otp from './components/Otp';
 import QuerySidebar from './components/QuerySidebar';
+import DashBoard from './components/DashBoard';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
 
 function AppContent() {
   const location = useLocation();
-  const hideLayout = location.pathname === '/get-otp' || location.pathname === '/register';
+  const hideLayout = location.pathname === '/get-otp' || location.pathname === '/register' || location.pathname === '/';
 
   return (
     <>
@@ -33,6 +34,7 @@ function AppContent() {
         {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/register" element={<Register />} />
         <Route path='/get-otp' element={<Otp></Otp>}></Route>
+        <Route path='/dashboard' element={<DashBoard></DashBoard>}></Route>
         <Route path="/taken" element={<Taken />} />
         <Route path="/pdata" element={<Data_p />} />
         <Route path="/tdata" element={<Data_t />} />

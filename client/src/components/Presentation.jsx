@@ -5,16 +5,19 @@ const Presentation = () => {
   // const [form] = Form.useForm();
   const [isGoldChecked, setIsGoldChecked] = useState(false);
   const [isSilverChecked, setIsSilverChecked] = useState(false);
+  const [isAmountChecked, setIsAmountChecked] = useState(false);
+  const [isObjChecked, setIsObjChecked] = useState(false)
 
   const onFinish = (values) => {
     const formData = {
       ...values,
       goldAmount: isGoldChecked ? values.goldAmount : 0,
       silverAmount: isSilverChecked ? values.silverAmount : 0,
+      amount: isAmountChecked ? values.amount : 0,
     };
     console.log('Form submitted:', formData);
     alert(`Form submitted successfully! ${JSON.stringify(formData)}`);
-    const response = fetch('',{
+    const response = fetch('', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -28,30 +31,31 @@ const Presentation = () => {
       <div className="w-full p-6 bg-gray-500 text-white max-w-2xl rounded-md shadow-lg">
         <Form layout="vertical" onFinish={onFinish} className="space-y-4">
           {/* Personal Information */}
-            <Form.Item label="First Name" name="firstName" rules={[{ required: true, message: 'Please enter first name' }]}>
-              <Input placeholder="Enter first name" />
-            </Form.Item>
+          <Form.Item label="First Name" name="firstName" rules={[{ required: true, message: 'Please enter first name' }]}>
+            <Input placeholder="Enter first name" />
+          </Form.Item>
 
-            <Form.Item label="Last Name" name="lastName" rules={[{ required: true, message: 'Please enter last name' }]}>
-              <Input placeholder="Enter last name" />
-            </Form.Item>
+          <Form.Item label="Last Name" name="lastName" rules={[{ required: true, message: 'Please enter last name' }]}>
+            <Input placeholder="Enter last name" />
+          </Form.Item>
 
-            <Form.Item label="City" name="city" rules={[{ required: true, message: 'Please enter city' }]}>
-              <Input placeholder="Enter city" />
-            </Form.Item>
+          <Form.Item label="City" name="city" rules={[{ required: true, message: 'Please enter city' }]}>
+            <Input placeholder="Enter city" />
+          </Form.Item>
 
-            <Form.Item label="Phone" name="phone" rules={[{ required: true, message: 'Please enter phone number' }]}>
-              <Input placeholder="Enter phone number" />
-            </Form.Item>
+          <Form.Item label="Phone" name="phone" rules={[{ required: true, message: 'Please enter phone number' }]}>
+            <Input placeholder="Enter phone number" />
+          </Form.Item>
 
-              <Form.Item label="Address" name="address" rules={[{ required: true, message: 'Please enter address' }]}>
-                <Input.TextArea placeholder="Enter address" rows={2} />
-              </Form.Item>
+          <Form.Item label="Address" name="address" rules={[{ required: false, message: 'Please enter address' }]}>
+            <Input.TextArea placeholder="Enter address" rows={2} />
+          </Form.Item>
 
           {/* Items Selection */}
           <Card>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {/* Gold Section */}
+              
               <div>
                 <Checkbox onChange={(e) => setIsGoldChecked(e.target.checked)}>Gold</Checkbox>
                 {isGoldChecked && (
@@ -70,18 +74,30 @@ const Presentation = () => {
                   </Form.Item>
                 )}
               </div>
+
+              {/* amount Section */}
+              <div>
+                <Checkbox onChange={(e) => setIsAmountChecked(e.target.checked)}>Amount</Checkbox>
+                {isAmountChecked && (
+                  <Form.Item name="amount" rules={[{ required: true, message: 'Please enter amount' }]}>
+                    <Input type="number" placeholder="Enter amount" />
+                  </Form.Item>
+                )}
+              </div>
+
+              {/* object Section */}
+              <div>
+                <Checkbox onChange={(e) => setIsObjChecked(e.target.checked)}>Object</Checkbox>
+                {isObjChecked && (
+                  <Form.Item name="object" rules={[{ required: true, message: 'Please enter object' }]}>
+                    <Input type="string" placeholder="Enter object" />
+                  </Form.Item>
+                )}
+              </div>
+
+
             </div>
           </Card>
-
-            <Form.Item label="Amount" name="amount"
-             rules={[{ required: true, message: 'Please enter amount' }]}>
-              <Input type='number' placeholder="Enter the amount" />
-            </Form.Item>
-
-            <Form.Item label="Amount" name="amount"
-             rules={[{ required: true, message: 'Please enter amount' }]}>
-              <Input type='number' placeholder="Enter the amount" />
-            </Form.Item>
 
           {/* Status Selection */}
           <Form.Item label="Status" name="status" rules={[{ required: true, message: 'Please select status' }]}>
@@ -98,8 +114,8 @@ const Presentation = () => {
             </Button>
           </Form.Item>
         </Form>
+      </div>
     </div>
-  </div>
   );
 };
 

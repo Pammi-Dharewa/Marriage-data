@@ -44,15 +44,22 @@ const QuerySidebar = () => {
           console.log(res);
           setData(res);
         }
-        
-    
       }catch(error){
-        message.error("Error fetching data");
+        console.log("Error fetching data", error);
       }
     }
      
     fetchData();
   }, [selectedQuery]);
+
+  const columns = [
+    {
+      key: '1',
+      title: 'name'
+    }
+  ]
+
+
 
   return (
     <div className="flex h-screen">
@@ -74,6 +81,8 @@ const QuerySidebar = () => {
         </ul>
       </aside>
 
+
+
       {/* Main Content */}
       <main className="flex-1 p-6">
         {selectedQuery ? (
@@ -83,8 +92,9 @@ const QuerySidebar = () => {
          
             <Table
               dataSource={data}
+              // columns={columns}
+              
               columns={data.length > 0 ? Object.keys(data[0]).map((key) => ({ title: key, dataIndex: key, key })) : []}
-              pagination={false}
             >  
             </Table>
 

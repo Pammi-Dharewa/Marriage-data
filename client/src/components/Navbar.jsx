@@ -23,13 +23,13 @@ const Navbar = () => {
           
           {/* Left Section - Logo and Navigation Links */}
           <div className="flex items-center text-[17px] space-x-9">
-            <Link to="/" className="text-xl font-bold flex  bg-gray-700 p-1 border border-dotted hover:text-gray-300 transition duration-300">
+            <Link to="/dashboard" className="text-xl font-bold flex  bg-gray-700 p-1 border border-dotted hover:text-gray-300 transition duration-300">
               Gift
               <span>Tracker</span>
             </Link>
             <div className="hidden md:flex space-x-6">
               <Link
-                to="/"
+                to="/dashboard"
                 className="hover:text-gray-300 transition duration-300 hover:scale-105"
               >
                 Home
@@ -90,7 +90,7 @@ const Navbar = () => {
           <div className="md:hidden bg-slate-700">
             <div className="flex flex-col space-y-4 p-4">
               <Link
-                to="/"
+                to="/dashboard"
                 className="hover:text-gray-300 transition duration-300 hover:scale-105"
                 onClick={toggleMobileMenu}
               >

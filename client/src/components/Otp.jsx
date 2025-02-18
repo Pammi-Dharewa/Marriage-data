@@ -1,6 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Form, Button, message } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ShieldCheck } from 'lucide-react';
+
 
 const Otp = () => {
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -8,7 +10,7 @@ const Otp = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const { email } = location.state || {};
+  const { email = "pammi" } = location.state || {};
   console.log(email);
 
   const onFinishOtp = async () => {
@@ -18,12 +20,12 @@ const Otp = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ otp, email }),
       });
-      
+
       const data = await response.json();
 
       if (response.ok) {
         message.success("Login Successful!");
-        navigate('/');
+        navigate('/dashboard');
       } else {
         message.error("Invalid OTP. Try again");
       }
@@ -51,18 +53,42 @@ const Otp = () => {
     }
   };
 
+  const [time, setTime] = useState(10);
+  
+
+  useEffect(()=>{
+
+    if(time <= 0){
+      return
+    }
+  
+  const timer = setInterval(() => {
+    setTime((prev)=> prev-1)
+  }, 1000);
+
+  return ()=> clearInterval(timer)
+
+  },[time])
+
+  console.log(time)
+
+
+
   return (
-    <div className="w-full h-screen flex justify-center items-center bg-gradient-to-b from-slate-950 to-blue-950">
-      <main className="w-full max-w-lg mx-4 p-6 sm:p-10 md:p-14 lg:p-20 bg-white/10 backdrop-blur-lg text-white rounded-xl shadow-2xl text-center flex flex-col items-center justify-center">
-        <p className="text-base sm:text-lg mb-2 font-mono">
-          {`Enter the OTP sent to your mail: ${email}`}
+    <div className="w-full min-h-screen px-4 flex justify-center items-center bg-gradient-to-b from-slate-950 to-blue-950">
+      <main className="w-full max-w-lg gap-1 p-6 sm:p-8 md:p-10 lg:p-12 sm:bg-white/10 backdrop-blur-lg text-white rounded-xl shadow-2xl text-center flex flex-col items-center justify-center">
+
+        <ShieldCheck className=' text-green-400 size-9 sm:size-11 mb-6' ></ShieldCheck>
+        <p className="text-base sm:text-md mb-2 font-mono">
+          Enter the OTP sent to your mail:
+          <span className=' text-slate-400 '> {email} </span>
         </p>
 
         <div className="flex w-full items-center justify-center gap-2 sm:gap-3 p-4">
           {otp.map((digit, index) => (
             <input
               key={index}
-              className="p-3 object-contain text-center text-lg w-8 h-auto sm:w-10 sm:h-10 bg-white/20 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
+              className="p-3 text-center text-lg w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14  bg-white/20 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
               value={digit}
               maxLength={1}
               onChange={(e) => handleChange(e.target.value, index)}
@@ -77,10 +103,13 @@ const Otp = () => {
             <Button
               type="primary"
               htmlType="submit"
-              className="w-full mt-5 text-base sm:text-lg font-semibold bg-blue-500 hover:bg-blue-600"
+              className="w-full mt-2 text-base sm:text-lg font-semibold"
             >
               Verify OTP
             </Button>
+            <div className='text-gray-300 font-light text-sm mt-2'>
+              {time > 0 ? `Time remaining: 00:${time < 10 ? `0${time}` : time}` : "OTP expired"}
+            </div>
           </Form.Item>
         </Form>
       </main>

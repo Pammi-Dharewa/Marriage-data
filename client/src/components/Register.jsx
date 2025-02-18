@@ -26,11 +26,11 @@ const Register = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center bg-black md:bg-gradient-to-r from-gray-950 to-gray-900 text-white p-4">
-      <div className="container mx-auto h-auto md:h-[800px] max-w-6xl flex flex-col md:flex-row rounded-lg border-2 border-[#00f2ff] shadow-lg animate-border-animation">
+    <div className="w-full min-h-screen flex justify-center items-center  text-white bg-gradient-to-r from-slate-950 to-teal-950  md:p-5">
+      <div className="container mx-auto w-250 h-auto md:h-[600px] max-w-6xl md:rounded-2xl flex flex-col md:flex-row shadow-lg ">
 
         {/* Left - Image and Text */}
-        <div className="w-full md:w-1/2 min-h-[400px] md:h-full flex flex-col bg-[#51a0b1]">
+        <div className="w-full md:w-1/2 min-h-[400px] md:h-full flex flex-col md:rounded-l-2xl bg-[#51a0b1]">
           <div className="flex-1 flex flex-col items-center justify-center p-8 md:p-12">
             <div className="w-full flex flex-col items-center justify-center gap-6">
               <img 
@@ -49,7 +49,7 @@ const Register = () => {
         </div>
 
         {/* Right - Registration Form */}
-        <div className="w-full md:w-1/2 min-h-[400px] md:h-full flex bg-white/10 backdrop-blur-lg">
+        <div className="w-full md:w-1/2 min-h-[400px] md:h-full flex md:rounded-r-2xl bg-white/10 backdrop-blur-3xl">
           <div className="flex-1 flex items-center justify-center p-8 md:p-12">
             <main className="w-full max-w-md">
               <h2 className="text-xl md:text-2xl font-bold mb-8">Register</h2>
