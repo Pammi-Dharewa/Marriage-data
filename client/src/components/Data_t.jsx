@@ -1,11 +1,12 @@
-import React from 'react'
+// import React from 'react'
 
-const Data_t = () => {
-  return (
-    <div className='min-h-screen'>
+// const Data_t = () => {
+//   return (
+//     <div className='min-h-screen'>
       
-    </div>
-  )
-}
+//     </div>
+//   )
+// }
 
-export default Data_t
+// export default Data_t
+// // 

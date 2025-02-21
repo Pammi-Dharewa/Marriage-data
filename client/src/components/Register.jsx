@@ -7,7 +7,7 @@ const Register = () => {
 
   const onFinish = async (values) => {
     try {
-      const response = await fetch('https://fec1-91-207-174-11.ngrok-free.app/public/signup', {
+      const response = await fetch('https://333f-117-217-222-183.ngrok-free.app/api/auth/v2/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
@@ -42,7 +42,7 @@ const Register = () => {
                 Welcome to <span className="text-teal-950">Our Platform</span>
               </h1>
               <p className="text-sm md:text-base lg:text-lg text-gray-300 text-center">
-                Join us to explore amazing features and connect with the community.
+                Join us to explore amazing features.
               </p>
             </div>
           </div>

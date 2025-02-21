@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Form, Input, Checkbox, Select, Card } from 'antd';
+import { Button, Form, Input, Checkbox, Select, Card, message } from 'antd';
+import { axiosInstance } from '../api';
 
 const Presentation = () => {
   // const [form] = Form.useForm();
@@ -8,22 +9,22 @@ const Presentation = () => {
   const [isAmountChecked, setIsAmountChecked] = useState(false);
   const [isObjChecked, setIsObjChecked] = useState(false)
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     const formData = {
       ...values,
-      goldAmount: isGoldChecked ? values.goldAmount : 0,
-      silverAmount: isSilverChecked ? values.silverAmount : 0,
+      gold: isGoldChecked ? values.gold : 0,
+      silver: isSilverChecked ? values.silver : 0,
       amount: isAmountChecked ? values.amount : 0,
+      objects: isObjChecked ? values.objects : 0,
     };
     console.log('Form submitted:', formData);
-    alert(`Form submitted successfully! ${JSON.stringify(formData)}`);
-    const response = fetch('', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
+    // alert(`Form submitted successfully! ${JSON.stringify(formData)}`);
+    try{
+      const response = await axiosInstance.post('/createPre', formData)
+    }catch(err){
+      message.error(err.message)
+    }
+
   };
 
   return (
@@ -59,7 +60,7 @@ const Presentation = () => {
               <div>
                 <Checkbox onChange={(e) => setIsGoldChecked(e.target.checked)}>Gold</Checkbox>
                 {isGoldChecked && (
-                  <Form.Item name="goldAmount" rules={[{ required: true, message: 'Please enter gold amount' }]}>
+                  <Form.Item name="gold" rules={[{ required: true, message: 'Please enter gold amount' }]}>
                     <Input type="number" placeholder="Enter gold amount" />
                   </Form.Item>
                 )}
@@ -69,7 +70,7 @@ const Presentation = () => {
               <div>
                 <Checkbox onChange={(e) => setIsSilverChecked(e.target.checked)}>Silver</Checkbox>
                 {isSilverChecked && (
-                  <Form.Item name="silverAmount" rules={[{ required: true, message: 'Please enter silver amount' }]}>
+                  <Form.Item name="silver" rules={[{ required: true, message: 'Please enter silver amount' }]}>
                     <Input type="number" placeholder="Enter silver amount" />
                   </Form.Item>
                 )}
@@ -89,7 +90,7 @@ const Presentation = () => {
               <div>
                 <Checkbox onChange={(e) => setIsObjChecked(e.target.checked)}>Object</Checkbox>
                 {isObjChecked && (
-                  <Form.Item name="object" rules={[{ required: true, message: 'Please enter object' }]}>
+                  <Form.Item name="objects" rules={[{ required: true, message: 'Please enter object' }]}>
                     <Input type="string" placeholder="Enter object" />
                   </Form.Item>
                 )}
@@ -100,10 +101,10 @@ const Presentation = () => {
           </Card>
 
           {/* Status Selection */}
-          <Form.Item label="Status" name="status" rules={[{ required: true, message: 'Please select status' }]}>
+          <Form.Item label="Status" name="typeOfPresentation" rules={[{ required: true, message: 'Please select status' }]}>
             <Select placeholder="Select status">
-              <Select.Option value="gifted">Gifted</Select.Option>
-              <Select.Option value="taken">Taken</Select.Option>
+              <Select.Option value="PRESENTATION">Gifted</Select.Option>
+              <Select.Option value="RECEIVING">Taken</Select.Option>
             </Select>
           </Form.Item>
 

@@ -5,12 +5,12 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const handleChange = (event) => {
-    const selectedValue = event.target.value;
-    if (selectedValue) {
-      navigate(selectedValue);
-    }
-  };
+  // const handleChange = (event) => {
+  //   const selectedValue = event.target.value;
+  //   if (selectedValue) {
+  //     navigate(selectedValue);
+  //   }
+  // };
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -51,7 +51,7 @@ const Navbar = () => {
 
           {/* Right Section - Dropdown and Mobile Menu Toggle */}
           <div className="flex items-center space-x-4">
-            <div className="relative hidden md:block w-48">
+            {/* <div className="relative hidden md:block w-48">
               <select
                 onChange={handleChange}
                 className="w-full px-4 py-2 text-sm bg-white text-gray-700 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 hover:bg-gray-100 transition duration-300"
@@ -60,7 +60,7 @@ const Navbar = () => {
                 <option value="/pdata">Gifted</option>
                 <option value="/tdata">Taken</option>
               </select>
-            </div>
+            </div> */}
 
             {/* Mobile Menu Toggle Button */}
             <button
@@ -110,7 +110,7 @@ const Navbar = () => {
               >
                 Taken Form
               </Link> */}
-              <div className="relative w-full">
+              {/* <div className="relative w-full">
                 <select
                   onClick={(e)=>{
                     if(e.target.value == '/pdata' || e.target.value == '/tdata'){
@@ -124,7 +124,7 @@ const Navbar = () => {
                   <option value="/pdata" onClick={toggleMobileMenu}>Gifted</option>
                   <option value="/tdata" onClick={toggleMobileMenu}>Taken</option>
                 </select>
-              </div>
+              </div> */}
             </div>
           </div>
         )}

@@ -1,7 +1,11 @@
-import React from "react";
+import React,{useState} from "react";
 import { Link } from "react-router-dom";
+import { CaretDownFilled, DownCircleTwoTone } from '@ant-design/icons'
 
 const Home = () => {
+
+  const[openIndex, setIsopenIndex] = useState(false)
+
 
   const steps = [
     {
@@ -29,9 +33,9 @@ const Home = () => {
   return (
     <>
       {/* Navbar */}
-      <nav className="w-full h-20 bg-gray-950 flex items-center justify-between px-8">
+      <nav className="w-full h-20 bg-gray-950 flex items-center justify-between px-8 fixed z-50">
         {/* Left - Gift Track Name */}
-        <div className="text-white text-2xl font-bold">
+        <div className="text-white text-2xl font-bold cursor-pointer">
           GiftTracker
         </div>
 
@@ -46,7 +50,7 @@ const Home = () => {
       {/* Hero Section */}
       <div className="bg-gray-950">
 
-        <div className="min-h-screen border-t p-3 bg-gradient-to-b from-black to-gray-950 text-white flex flex-col sm:flex-row items-center justify-center text-center sm:text-left">
+        <div className="min-h-screen pt-24 sm:pt-15 border-t p-3 bg-gradient-to-b from-black to-gray-950 text-white flex flex-col sm:flex-row items-center justify-center text-center sm:text-left">
           {/* Left - Text Content */}
           <div className="w-full sm:w-2/3 flex flex-col items-center sm:items-start justify-center px-4 gap-8 animate-fade-in">
             {/* Animated Title */}
@@ -83,7 +87,7 @@ const Home = () => {
           <h3 className="text-3xl pb-5 font-semibold text-center text-gray-300 animate-fade-in">
             Why Choose Us?
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-6 ">
             {/* Feature Cards */}
             {[
               {
@@ -121,9 +125,8 @@ const Home = () => {
 
           <div className="relative flex right-[20%]">
             {/* Centered Timeline Line */}
-            <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-full bg-gray-800">
+            <div className="absolute left-1/2 w-[0.1rem] h-full bg-blue-800">
               {/* Glowing Animated Progress Bar */}
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-blue-500 to-blue-600 animate-pulse" />
             </div>
 
             {/* Steps Container */}
@@ -190,15 +193,29 @@ const Home = () => {
                 question: "Can I export my data?",
                 answer: "Yes, you can export your data as a CSV or PDF file.",
               },
-            ].map((faq, index) => (
+            ].map((faq, index) => {
+              const isOpen = openIndex === index;
+
+              return (
+              
               <div
                 key={index}
-                className="group p-6 bg-gray-800 cursor-pointer rounded-lg shadow-lg animate-fade-in-up"
+                className="group p-6 bg-gray-800/40 cursor-pointer rounded-lg shadow-lg animate-fade-in-up"
               >
-                <h4 className="text-xl font-semibold text-white">{faq.question}</h4>
-                <p className="text-gray-300 mt-2 h-0 group-hover:h-auto opacity-0 group-hover:opacity-100">{faq.answer}</p>
+                <div className="flex justify-between" onClick={() => setIsopenIndex(isOpen ? null : index)}> 
+                <div >
+                  <h4 className="text-xl font-semibold text-white">{faq.question}</h4>
+                  <p className={`text-gray-300 mt-2 h-0 group-hover:h-auto opacity-0 group-hover:opacity-100 
+                    ${isOpen ? "h-auto opacity-100" : "h-0 opacity-0" }
+                      "md: group-hover:h-auto group-hover:opacity-100" `}
+                  
+                  >{faq.answer}</p>
+                </div>
+                <DownCircleTwoTone className={`text-2xl ${isOpen ? "rotate-180" : "rotate-0" }`}/>     
+                 </div>
+               
               </div>
-            ))}
+            )})}
           </div>
         </div>
 
@@ -250,7 +267,7 @@ const Home = () => {
           </div>
 
           {/* Copyright */}
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-300">
+          <div className="border-t pb-2 border-gray-800 mt-8 pt-8 text-center text-gray-300">
             <p>&copy; {new Date().getFullYear()} GiftTracker. All rights reserved.</p>
           </div>
         </div>

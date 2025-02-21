@@ -15,7 +15,7 @@ const Otp = () => {
 
   const onFinishOtp = async () => {
     try {
-      const response = await fetch("https://fec1-91-207-174-11.ngrok-free.app/public/otp", {
+      const response = await fetch("https://333f-117-217-222-183.ngrok-free.app/public/otp", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ otp, email }),
