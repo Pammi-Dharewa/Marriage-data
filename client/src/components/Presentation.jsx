@@ -20,7 +20,7 @@ const Presentation = () => {
     console.log('Form submitted:', formData);
     // alert(`Form submitted successfully! ${JSON.stringify(formData)}`);
     try{
-      const response = await axiosInstance.post('/createPre', formData)
+      const response = await axiosInstance.post('/formapi', formData)
     }catch(err){
       message.error(err.message)
     }
@@ -28,8 +28,8 @@ const Presentation = () => {
   };
 
   return (
-    <div className="min-h-screen w-full p-4 sm:p-6 md:p-8 lg:p-12 flex justify-center items-center bg-gradient-to-b from-slate-950 to-slate-800">
-      <div className="w-full p-6 bg-gray-500 text-white max-w-2xl rounded-md shadow-lg">
+    <div className="min-h-screen w-full p-4 sm:p-6 md:p-8 lg:p-12 flex justify-center items-center bg-blue-100">
+      <div className="w-full p-6 bg-white text-white max-w-2xl rounded-md shadow-lg">
         <Form layout="vertical" onFinish={onFinish} className="space-y-4">
           {/* Personal Information */}
           <Form.Item label="First Name" name="firstName" rules={[{ required: true, message: 'Please enter first name' }]}>

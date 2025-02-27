@@ -1,42 +1,56 @@
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+// App.jsx
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import './App.css';
-import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Presentation from './components/Presentation';
 import Taken from './components/Taken';
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 import Register from './components/Register';
 import Otp from './components/Otp';
 import QuerySidebar from './components/QuerySidebar';
 import DashBoard from './components/DashBoard';
+import SideBar from './components/SideBar';
+import Support from './components/Support';
 
 function App() {
   return (
     <BrowserRouter>
-      <AppContent />
+      <Routes>
+        {/* Auth/Layout routes (no Sidebar or Footer) */}
+        <Route element={<AuthLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/get-otp" element={<Otp />} />
+          <Route path='/dashboard/support' element={<Support></Support>}></Route>
+        </Route>
+        {/* Dashboard/Layout routes (with Sidebar, Navbar) */}
+        <Route element={<DashboardLayout />}>
+          <Route path="/presentation" element={<Presentation />} />
+          <Route path="/dashboard" element={<DashBoard />} />
+          <Route path="/taken" element={<Taken />} />
+          <Route path="/query" element={<QuerySidebar />} />
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }
 
-function AppContent() {
-  const location = useLocation();
-  const hideLayout = location.pathname === '/get-otp' || location.pathname === '/register' || location.pathname === '/';
-
+function DashboardLayout() {
   return (
     <>
-      {!hideLayout && <Navbar />}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/presentation" element={<Presentation />} />
-        <Route path="/register" element={<Register />} />
-        <Route path='/get-otp' element={<Otp></Otp>}></Route>
-        <Route path='/dashboard' element={<DashBoard></DashBoard>}></Route>
-        <Route path="/taken" element={<Taken />} />
-        <Route path='/query' element={<QuerySidebar></QuerySidebar>}/>
-      </Routes>
-      {!hideLayout && <Footer />}
+      <div className="dashboard-container" style={{ display: 'flex' }}>
+        <SideBar />
+        <div className="content" style={{ flex: 1, padding: '20px' }}>
+          <Outlet />
+        </div>
+      </div>
+      {/* <Footer /> */}
     </>
   );
+}
+
+function AuthLayout() {
+  return <Outlet />;
 }
 
 export default App;
