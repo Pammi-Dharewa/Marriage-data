@@ -1,24 +1,68 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
-import { mockBarData } from '../../../Data/mockData';
 
+const Barchart = ({ data, title, yAxisLabel }) => {
+  if (!data || data.length === 0) {
+    return <h3 className="text-center text-gray-500">Sorry, No Data to Show</h3>;
+  }
 
-const Barchart = ({data, title, yAxisLabel}) => {
- 
-  // console.log("from bar", data)
+  // Neon color palette
+  const neonColors = [
+    "#39FF14", // Neon Green
+    "#FF10F0", // Neon Pink
+    "#00FFFF", // Neon Cyan
+    "#FFD700", // Neon Yellow
+    "#FF007F", // Neon Magenta
+    "#00FF7F", // Neon Spring Green
+    "#FF00FF", // Neon Fuchsia
+    "#00FF00", // Neon Lime
+  ];
 
-
-    
   return (
     <div style={{ height: 250 }}>
+      <h3 className="text-center text-white text-xl font-bold ">{title}</h3>
       <ResponsiveBar
         data={data}
-        keys={["total"]}  // Y-axis values
-        indexBy="fullName"  // X-axis categories
+        keys={["total"]} // Y-axis values
+        indexBy="fullName" // X-axis categories
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}
-        colors={{ scheme: "nivo"}}
-        borderRadius={1}
+        colors={({ index }) => neonColors[index % neonColors.length]} // Neon bar colors
+        borderRadius={4}
+        theme={{
+          textColor: "#ffffff", // White text for labels
+          axis: {
+            domain: {
+              line: {
+                stroke: "#ffffff", // White axis lines
+              },
+            },
+            ticks: {
+              line: {
+                stroke: "#ffffff", // White tick lines
+              },
+              text: {
+                fill: "#ffffff", // White tick text
+              },
+            },
+            legend: {
+              text: {
+                fill: "#ffffff", // White legend text
+              },
+            },
+          },
+          grid: {
+            line: {
+              stroke: "#555555", // Light gray grid lines
+            },
+          },
+          tooltip: {
+            container: {
+              background: "#4FD1C5", // Light teal tooltip background
+              color: "#ffffff", // White tooltip text
+            },
+          },
+        }}
         axisBottom={{
           tickSize: 5,
           tickPadding: 5,
@@ -33,11 +77,11 @@ const Barchart = ({data, title, yAxisLabel}) => {
           tickRotation: 0,
           legend: yAxisLabel,
           legendPosition: "middle",
-          legendOffset: -40,
+          legendOffset: -45,
         }}
         labelSkipWidth={12}
         labelSkipHeight={12}
-        labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+        labelTextColor="#ffffff" // White bar labels
         legends={[
           {
             dataFrom: "keys",

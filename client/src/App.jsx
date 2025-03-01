@@ -40,7 +40,7 @@ function DashboardLayout() {
     <>
       <div className="dashboard-container" style={{ display: 'flex' }}>
         <SideBar />
-        <div className="content" style={{ flex: 1, padding: '20px' }}>
+        <div className="" style={{ flex: 1}}>
           <Outlet />
         </div>
       </div>

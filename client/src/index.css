@@ -2,15 +2,18 @@
 
 
 
-body {
+/* body {
   font-family: modern;
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
   background-color: #ffffff;
+} */
+
+
+
+html, body, #root {
+  height: 100%;
+  font-family: modern;
 }
-
-
-
-

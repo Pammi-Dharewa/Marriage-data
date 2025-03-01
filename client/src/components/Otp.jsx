@@ -53,22 +53,22 @@ const Otp = () => {
     }
   };
 
-  const [time, setTime] = useState(10);
+  // const [time, setTime] = useState(10);
   
 
-  useEffect(()=>{
+  // useEffect(()=>{
 
-    if(time <= 0){
-      return
-    }
+  //   if(time <= 0){
+  //     return
+  //   }
   
-  const timer = setInterval(() => {
-    setTime((prev)=> prev-1)
-  }, 1000);
+  // const timer = setInterval(() => {
+  //   setTime((prev)=> prev-1)
+  // }, 1000);
 
-  return ()=> clearInterval(timer)
+  // return ()=> clearInterval(timer)
 
-  },[time])
+  // },[time])
 
   console.log(time)
 
@@ -107,9 +107,9 @@ const Otp = () => {
             >
               Verify OTP
             </Button>
-            <div className='text-gray-300 font-light text-sm mt-2'>
+            {/* <div className='text-gray-300 font-light text-sm mt-2'>
               {time > 0 ? `Time remaining: 00:${time < 10 ? `0${time}` : time}` : "OTP expired"}
-            </div>
+            </div> */}
           </Form.Item>
         </Form>
       </main>

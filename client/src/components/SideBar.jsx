@@ -21,7 +21,7 @@ const Item = ({ title, icon, selected, setSelected }) => {
   return (
     <MenuItem
       active={selected === title}
-      className= {selected === title ? "text-blue-500" : "text-gray-500"}
+      className= {selected === title ? "text-blue-500" : "text-gray-400 hover:text-black"}
       onClick={() => setSelected(title)}
       icon={icon}
     >
@@ -32,116 +32,72 @@ const Item = ({ title, icon, selected, setSelected }) => {
 };
 
 const SideBar = () => {
-  // const theme = useTheme();
-  // const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
 
   return (
     <Box>
-      <Sidebar collapsed={isCollapsed} className="h-full min-h-screen bg-blue-100">
+      <Sidebar
+        collapsed={isCollapsed}
+        backgroundColor="hsl(225, 39%, 13%)"
+        className="h-full min-h-screen"
+      >
         <Menu>
-          {/* LOGO AND MENU ICON */}
-          <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
-            style={{
-              margin: "10px 0 20px 0",
-              // color: colors.grey[100],
-            }}
-          >
+          <div className="p-4 flex justify-between items-center text-white">
             {!isCollapsed && (
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                ml="15px"
-              >
-                <Typography variant="h7" className="font-serif">
-                  GiftHub
-                </Typography>
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                  <MenuOutlinedIcon />
-                </IconButton>
-              </Box>
+              <Typography variant="h7" className="font-serif text-yellow-200" style={{ fontFamily: "cursive" }}>
+                GiftHub
+              </Typography>
             )}
-          </MenuItem>
+            <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+              <MenuOutlinedIcon className="text-white" />
+            </IconButton>
+          </div>
 
           {!isCollapsed && (
-            <Box mb="25px">
-              {/* */}
-
-              <Box textAlign="center">
-                <Typography
-                  variant="h5"
-                  // color={colors.grey[100]}
-                  fontWeight="bold"
-                  // sx={{ m: "10px 0 0 0" }}
-                >
-                  Ed Roh
-                </Typography>
-                
-              </Box>
+            <Box mb="25px" textAlign="center">
+              <Typography variant="h5" fontWeight="bold" color="white">
+                Ed Roh
+              </Typography>
             </Box>
           )}
 
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-           
-            <Link to='/dashboard'>
-            <Item
-              title="Dashboard"
-              icon={<HomeOutlinedIcon className="" />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+          {/* 🔹 Sidebar Menu Items with Hover Effect */}
+          <Box paddingLeft={isCollapsed ? "" : "10%"}>
+            <Link to="/dashboard">
+              <Item
+                title="Dashboard"
+                icon={<HomeOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
             </Link>
 
-            <Link to='presentation'>
+            <Link to="presentation">
               <Item
                 title="Form"
-                icon={<EditNoteOutlinedIcon className="" />}
+                icon={<EditNoteOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
             </Link>
 
-            <Link to='query'>
-            <Item
+            <Link to="query">
+              <Item
                 title="Table"
-                icon={<TableChartOutlinedIcon className=""/>}
+                icon={<TableChartOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
-           </Link>
-
-           {/* <Link>
-            <Item
-                title="Calendar"
-                to="/calendar"
-                icon={<CalendarTodayOutlinedIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
-           </Link> */}
-
-           
-           
-            {/* <Item
-              title="FAQ Page"
-              to="/faq"
-              icon={<HelpOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
-
-            
+            </Link>
           </Box>
-          
         </Menu>
       </Sidebar>
     </Box>
   );
 };
+
+
 
 export default SideBar;
 

@@ -40,7 +40,7 @@ const queries = [
   },
 ];
 
-const QuerySidebar  = () => {
+const QuerySidebar = () => {
   const [selectedQuery, setSelectedQuery] = useState(null);
   const [queryParams, setQueryParams] = useState({});
   const [data, setData] = useState([]);
@@ -64,11 +64,11 @@ const QuerySidebar  = () => {
       const queryString = Object.entries(paramsForQuery)
         .map(([key, value]) => `${key}=${value}`)
         .join("&");
-      
+
       const url = `/${selectedQuery.name}${queryString ? `?${queryString}` : ""}`;
       const response = await axiosInstance.get(url);
       if (response.data) {
-        console.log(response.data)
+        console.log(response.data);
         setData(Array.isArray(response.data) ? response.data : [response.data]);
       } else {
         message.error("Failed to fetch data");
@@ -84,16 +84,19 @@ const QuerySidebar  = () => {
     if (!selectedQuery || selectedQuery.params.length === 0) return null;
     return selectedQuery.params.map((param) => (
       <div key={`${selectedQuery.key}-${param.name}`} className="mb-4">
-        <label className="block text-gray-700">{param.name}</label>
+        <label className="block text-gray-300">{param.name}</label>
         {param.type === "select" ? (
           <Select
             style={{ width: "100%" }}
             placeholder={`Select ${param.name}`}
             value={queryParams[selectedQuery.key]?.[param.name] || undefined}
             onChange={(value) => handleParamChange(selectedQuery.key, param.name, value)}
+            className="bg-gray-700/50 backdrop-blur-sm text-white border border-gray-600/50 rounded-lg"
           >
             {param.options.map((option) => (
-              <Option key={option} value={option}>{option}</Option>
+              <Option key={option} value={option} className="text-white">
+                {option}
+              </Option>
             ))}
           </Select>
         ) : (
@@ -101,6 +104,7 @@ const QuerySidebar  = () => {
             placeholder={`Enter ${param.name}`}
             value={queryParams[selectedQuery.key]?.[param.name] || ""}
             onChange={(e) => handleParamChange(selectedQuery.key, param.name, e.target.value)}
+            className="bg-gray-700/50 backdrop-blur-sm text-white border border-gray-600/50 rounded-lg"
           />
         )}
       </div>
@@ -108,12 +112,12 @@ const QuerySidebar  = () => {
   };
 
   return (
-    <div className="h-full w-full p-5">
+    <div className="h-full w-full p-5 bg-gradient-to-b from-gray-900 to-gray-950">
       {/* Query Selection Dropdown */}
       <div className="mb-5">
-        <h2 className="text-lg font-bold mb-2">Select a Query</h2>
+        <h2 className="text-lg font-bold mb-2 text-white">Select a Query</h2>
         <Select
-        className="w-full"
+          className="w-full bg-gray-700/50 backdrop-blur-sm text-white border border-gray-600/50 rounded-lg"
           placeholder="Choose a query"
           onChange={(value) => {
             const query = queries.find((q) => q.key === value);
@@ -124,32 +128,41 @@ const QuerySidebar  = () => {
               [query.key]: {},
             }));
           }}
-          
         >
           {queries.map((query) => (
-            <Option key={query.key} value={query.key}>{query.label}</Option>
+            <Option key={query.key} value={query.key} className="text-white">
+              {query.label}
+            </Option>
           ))}
         </Select>
-      </div> 
+      </div>
 
       {/* Query Details & Results */}
       {selectedQuery && (
-        <div className="p-4 border border-gray-300 rounded-md shadow-md h-auto overflow-auto">
-          <h3 className="text-xl font-bold mb-4">Selected Query: {selectedQuery.label}</h3>
+        <div className="p-4 border border-gray-700/50 rounded-md shadow-md bg-gray-800/50 backdrop-blur-sm h-auto overflow-auto">
+          <h3 className="text-xl font-bold mb-4 text-white">Selected Query: {selectedQuery.label}</h3>
           {renderParameterInputs()}
-          <Button type="primary" onClick={fetchData} loading={loading} className="mt-3">Fetch Data</Button>
+          <Button
+            type="primary"
+            onClick={fetchData}
+            loading={loading}
+            className="mt-3 bg-blue-600/90 hover:bg-blue-700/90 text-white border border-blue-500/50 rounded-lg"
+          >
+            Fetch Data
+          </Button>
           {data.length > 0 ? (
             <Table
               dataSource={data}
               columns={Object.keys(data[0]).map((key) => ({
-                title: key,
+                title: key.replace(/_/g, " ").toUpperCase(),
                 dataIndex: key,
                 key,
               }))}
-              className="mt-5"
+              className="mt-5 bg-gray-700/50 backdrop-blur-sm text-white border border-gray-600/50 rounded-lg"
+              pagination={{ pageSize: 5 }}
             />
           ) : (
-            <p className="text-gray-500 mt-4">No data available.</p>
+            <p className="text-gray-400 mt-4">No data available.</p>
           )}
         </div>
       )}
@@ -157,4 +170,4 @@ const QuerySidebar  = () => {
   );
 };
 
-export default QuerySidebar ;
+export default QuerySidebar;
